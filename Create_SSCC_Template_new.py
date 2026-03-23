@@ -75,6 +75,7 @@ def create_sscc_template(driver, wait, template_name, business_partner, number_g
     driver.refresh()
 
 driver.get(url)
+time.sleep(10)
 wait.until(EC.presence_of_element_located((By.NAME,'identifier'))).send_keys(username)
 driver.find_element(By.NAME,'password').send_keys(password)
 driver.find_element(By.XPATH, "//button[text()='Login']").click()
