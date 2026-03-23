@@ -16,7 +16,6 @@ options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
 driver=webdriver.Chrome(options=options)
-driver.maximize_window()
 wait=WebDriverWait(driver, 15)
 
 df=pd.read_excel("ACG_Common_Workbook.xlsx", sheet_name="Product+SNG", dtype=str)
