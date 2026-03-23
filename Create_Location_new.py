@@ -116,6 +116,7 @@ def create_location(driver, wait, loc_name, loc_type, entity, loc_id_type, loc_i
     time.sleep(5)
 
 driver.get(url)
+time.sleep(10)
 wait.until(EC.presence_of_element_located((By.NAME,'identifier'))).send_keys(username)
 driver.find_element(By.NAME,'password').send_keys(password)
 driver.find_element(By.XPATH, "//button[text()='Login']").click()
