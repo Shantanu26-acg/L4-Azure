@@ -24,18 +24,19 @@ pipeline {
                     // bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Location_new.py -v --html=report.html"
                     // bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Product_SNG.py -v --html=report.html"
                     // bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_SSCC_Template_new.py -v --html=report.html"
-
-                    def scripts = [
-                        "Create_role_new.py",
-                        "Create_User_new.py",
-                        "Create_Location_new.py",
-                        "Create_Product_SNG.py",
-                        "Create_SSCC_Template_new.py"
-                    ]
-                    
-                    for (s in scripts) {
-                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                            bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" ${s} -v --html=report.html"
+                    script{
+                        def scripts = [
+                            "Create_role_new.py",
+                            "Create_User_new.py",
+                            "Create_Location_new.py",
+                            "Create_Product_SNG.py",
+                            "Create_SSCC_Template_new.py"
+                        ]
+                        
+                        for (s in scripts) {
+                            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" ${s} -v --html=report.html"
+                            }
                         }
                     }
                 }
