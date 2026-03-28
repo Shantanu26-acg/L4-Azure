@@ -32,8 +32,8 @@ username=df_logindata.iloc[0, 1]
 password=df_logindata.iloc[0, 2]
 
 def create_sscc_template(driver, wait, template_name, business_partner, number_generator, extension_digit, bus_ptn, location):
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@aria-label='Menu']"))).click()
-    element=wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Serial Number Management']")))
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Menu']"))).click()
+    element=wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Serial Number Management']")))
     driver.execute_script("arguments[0].scrollIntoView();", element)
     driver.execute_script("arguments[0].click();", element)
     wait.until(EC.element_to_be_clickable((By.XPATH, "//li[normalize-space()='Create SSCC Template']"))).click()
@@ -75,7 +75,7 @@ def create_sscc_template(driver, wait, template_name, business_partner, number_g
     driver.refresh()
 
 driver.get(url)
-wait.until(EC.presence_of_element_located((By.NAME,'identifier'))).send_keys(username)
+wait.until(EC.element_to_be_clickable((By.NAME,'identifier'))).send_keys(username)
 driver.find_element(By.NAME,'password').send_keys(password)
 driver.find_element(By.XPATH, "//button[text()='Login']").click()
 # create_sscc_template(driver, wait, "", "", "", "", "", "")
