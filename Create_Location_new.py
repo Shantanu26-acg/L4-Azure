@@ -35,8 +35,8 @@ password=df_logindata.iloc[0, 2]
 print(url, username, password)
 
 def create_location(driver, wait, loc_name, loc_type, entity, loc_id_type, loc_id, bus_ent, phy_site, loc_num, country, state, city, address, postal_code, poc_name, poc_email, phone_number, website):
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@aria-label='Menu']"))).click()
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()= 'Master Data']"))).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Menu']"))).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()= 'Master Data']"))).click()
     driver.find_element(By.XPATH, "//li[text()= 'Location master data']").click()
 
     wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()= '+ New Location']"))).click()
@@ -117,7 +117,7 @@ def create_location(driver, wait, loc_name, loc_type, entity, loc_id_type, loc_i
 
 
 driver.get(url)
-wait.until(EC.presence_of_element_located((By.NAME,'identifier'))).send_keys(username)
+wait.until(EC.element_to_be_clickable((By.NAME,'identifier'))).send_keys(username)
 driver.find_element(By.NAME,'password').send_keys(password)
 driver.find_element(By.XPATH, "//button[text()='Login']").click()
 # create_location(driver, wait, "abc", "Internal Site", "Bin", "GLN/SGLN", 100001, "Macleods Pharmaceuticals Ltd", "Amneal_SRB(Office)", 1111111, "India","Maharashtra" ,"Mumbai" ,"abcd" ,"400067" ,"Shantanu","shantanu.mule@email.com", "9867766319", "https://shantanu.com")
