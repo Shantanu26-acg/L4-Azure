@@ -10,7 +10,7 @@ import tempfile
 
 options = Options()
 options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
-options.add_argument("--headless")
+# options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -115,14 +115,9 @@ def create_location(driver, wait, loc_name, loc_type, entity, loc_id_type, loc_i
 
     time.sleep(5)
 
+
 driver.get(url)
-time.sleep(10)
-# wait.until(EC.presence_of_element_located((By.NAME,'identifier'))).send_keys(username)
-elem=wait.until(EC.visibility_of_element_located((By.NAME,'identifier')))
-driver.execute_script("arguments[0].scrollIntoView();", elem)
-wait.until(EC.element_to_be_clickable((By.NAME, 'identifier')))
-elem.clear()
-elem.send_keys(username)
+wait.until(EC.presence_of_element_located((By.NAME,'identifier'))).send_keys(username)
 driver.find_element(By.NAME,'password').send_keys(password)
 driver.find_element(By.XPATH, "//button[text()='Login']").click()
 # create_location(driver, wait, "abc", "Internal Site", "Bin", "GLN/SGLN", 100001, "Macleods Pharmaceuticals Ltd", "Amneal_SRB(Office)", 1111111, "India","Maharashtra" ,"Mumbai" ,"abcd" ,"400067" ,"Shantanu","shantanu.mule@email.com", "9867766319", "https://shantanu.com")

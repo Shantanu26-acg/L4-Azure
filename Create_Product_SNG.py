@@ -10,12 +10,13 @@ import tempfile
 
 options = Options()
 options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
-options.add_argument("--headless=new")
+# options.add_argument("--headless=new")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
 driver=webdriver.Chrome(options=options)
+# driver.maximize_window()
 wait=WebDriverWait(driver, 15)
 
 df=pd.read_excel("ACG_Common_Workbook.xlsx", sheet_name="Product+SNG", dtype=str)
@@ -301,13 +302,7 @@ def create_product_sng():
 
 
 driver.get(url)
-time.sleep(10)
-# wait.until(EC.presence_of_element_located((By.NAME, 'identifier'))).send_keys(username)
-elem=wait.until(EC.visibility_of_element_located((By.NAME,'identifier')))
-driver.execute_script("arguments[0].scrollIntoView();", elem)
-wait.until(EC.element_to_be_clickable((By.NAME, 'identifier')))
-elem.clear()
-elem.send_keys(username)
+wait.until(EC.presence_of_element_located((By.NAME, 'identifier'))).send_keys(username)
 driver.find_element(By.NAME, 'password').send_keys(password)
 driver.find_element(By.XPATH, "//button[text()='Login']").click()
 # wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@aria-label='Menu']"))).click()
