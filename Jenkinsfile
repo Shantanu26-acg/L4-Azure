@@ -29,9 +29,9 @@ pipeline {
                         bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" -m pip install -r requirements.txt"
                     }
                     
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_role_new.py -v --html=report.html"
-                    }
+                    // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    //     bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_role_new.py -v --html=report.html"
+                    // }
                     
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                         bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_User_new.py -v --html=report.html"
@@ -41,13 +41,13 @@ pipeline {
                         bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Location_new.py -v --html=report.html"
                     }
 
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Product_SNG.py -v --html=report.html"
-                    }
+                    // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    //     bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Product_SNG.py -v --html=report.html"
+                    // }
                     
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_SSCC_Template_new.py -v --html=report.html"
-                    }
+                    // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    //     bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_SSCC_Template_new.py -v --html=report.html"
+                    // }
                 }
                 // script{
                 //     def scripts = [
