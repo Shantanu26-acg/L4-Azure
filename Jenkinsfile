@@ -8,15 +8,15 @@ pipeline {
             }
         }
 
-        stage('Clone Repository') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Shantanu26-acg/L4-Azure.git'
-            }
-        }
+        // stage('Clone Repository') {
+        //     steps {
+        //         git branch: 'main', url: 'https://github.com/Shantanu26-acg/L4-Azure.git'
+        //     }
+        // }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest --maxfail=1 --disable-warnings -q'
+                // sh 'pytest --maxfail=1 --disable-warnings -q'
                 withEnv(["PYTHONENCODING=utf-8"]) {
                     bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" -m pip install -r requirements.txt"
                     bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_role_new.py -v --html=report.html"
