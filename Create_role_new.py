@@ -88,7 +88,7 @@ import tempfile
 
 options = Options()
 options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
-options.add_argument("--headless")
+# options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -129,16 +129,9 @@ def create_role(driver, wait, role_name, role_desc):
     time.sleep(10)
 
 driver.get(url)
-time.sleep(10)
-# wait.until(EC.presence_of_element_located((By.NAME,'identifier'))).send_keys(username)
-elem=wait.until(EC.visibility_of_element_located((By.NAME,'identifier')))
-driver.execute_script("arguments[0].scrollIntoView();", elem)
-wait.until(EC.element_to_be_clickable((By.NAME, 'identifier')))
-elem.clear()
-elem.send_keys(username)
+wait.until(EC.element_to_be_clickable((By.NAME,'identifier'))).send_keys(username)
 driver.find_element(By.NAME,'password').send_keys(password)
 driver.find_element(By.XPATH, "//button[text()='Login']").click()
-# create_role(driver, wait, "Admin_new", "Testing")
 
 for idx, row in df.iterrows():
     create_role(driver,
