@@ -131,7 +131,7 @@ def create_role(driver, wait, role_name, role_desc):
 driver.get(url)
 time.sleep(10)
 # wait.until(EC.presence_of_element_located((By.NAME,'identifier'))).send_keys(username)
-elem=wait.until(EC.visibility_of_element_located((By.NAME,'identifier')))
+elem=wait.until(EC.element_to_be_clickable((By.NAME,'identifier')))
 driver.execute_script("arguments[0].scrollIntoView();", elem)
 wait.until(EC.element_to_be_clickable((By.NAME, 'identifier')))
 elem.clear()
