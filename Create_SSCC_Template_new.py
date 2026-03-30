@@ -15,7 +15,7 @@ import pandas as pd
 
 options = Options()
 options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
-# options.add_argument("--headless=new")
+options.add_argument("--headless=new")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -33,10 +33,12 @@ password=df_logindata.iloc[0, 2]
 
 def create_sscc_template(driver, wait, template_name, business_partner, number_generator, extension_digit, bus_ptn, location):
     wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Menu']"))).click()
-    element=wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Serial Number Management']")))
+    element=wait.until(EC.visibility_of_element_located((By.XPATH, "//span[normalize-space()='Serial Number Management']")))
     driver.execute_script("arguments[0].scrollIntoView();", element)
     driver.execute_script("arguments[0].click();", element)
     wait.until(EC.element_to_be_clickable((By.XPATH, "//li[normalize-space()='Create SSCC Template']"))).click()
+
+    time.sleep(3)
 
     wait.until(EC.element_to_be_clickable((By.ID, "templateName"))).send_keys(template_name)
 
@@ -60,7 +62,9 @@ def create_sscc_template(driver, wait, template_name, business_partner, number_g
 
     wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Add']"))).click()
 
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Submit']"))).click()
+    submit_btn=wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Submit']")))
+    driver.execute_script("arguments[0].scrollIntoView();", submit_btn)
+    driver.execute_script("arguments[0].click();", submit_btn)
 
     try:
         toast_element = wait.until(
@@ -75,7 +79,7 @@ def create_sscc_template(driver, wait, template_name, business_partner, number_g
     driver.refresh()
 
 driver.get(url)
-wait.until(EC.element_to_be_clickable((By.NAME,'identifier'))).send_keys(username)
+wait.until(EC.presence_of_element_located((By.NAME,'identifier'))).send_keys(username)
 driver.find_element(By.NAME,'password').send_keys(password)
 driver.find_element(By.XPATH, "//button[text()='Login']").click()
 # create_sscc_template(driver, wait, "", "", "", "", "", "")

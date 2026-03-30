@@ -10,7 +10,7 @@ import tempfile
 
 options = Options()
 options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
-# options.add_argument("--headless=new")
+options.add_argument("--headless=new")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -32,7 +32,7 @@ def create_product(driver, wait, row_idx, prd_id, prd_name, prd_desc, manufactur
     wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Menu']"))).click()
     wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()= 'Master Data']"))).click()
     driver.find_element(By.XPATH, "//li[text()= 'Add Product']").click()
-    wait.until(EC.presence_of_element_located((By.ID, 'productIdentifierType'))).click()
+    wait.until(EC.element_to_be_clickable((By.ID, 'productIdentifierType'))).click()
     checkbox=driver.find_element(By.XPATH, "//span[text()='Product Code']")
     driver.execute_script("arguments[0].scrollIntoView(true)", checkbox)
     driver.find_element(By.XPATH, "//span[text()='Product Code']").click()
@@ -52,7 +52,7 @@ def create_product(driver, wait, row_idx, prd_id, prd_name, prd_desc, manufactur
     wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Next']"))).click()
 
     for i in range(int(no_of_levels)):
-        packaging_code=wait.until(EC.presence_of_element_located((By.ID, 'packagingCodeType')))
+        packaging_code=wait.until(EC.element_to_be_clickable((By.ID, 'packagingCodeType')))
         driver.execute_script("arguments[0].scrollIntoView(true)", packaging_code)
         packaging_code.click()
         gtin_format = driver.find_element(By.XPATH, "//*[@id='dropdownItem_0']/span")
@@ -163,7 +163,7 @@ def create_template(driver, wait, temp_name, SN_Gen, product, encoding, business
         print("productpackaging", productpackaging)
 
         if productpackaging.split("-")[-1]!='Pallet':
-            wait.until(EC.presence_of_element_located((By.ID, 'templateName'))).send_keys(temp_name+"_"+str(i))
+            wait.until(EC.element_to_be_clickable((By.ID, 'templateName'))).send_keys(temp_name+"_"+str(i))
 
             driver.find_element(By.XPATH, "//span[text()='Serial Number Generator']").click()
             driver.find_element(By.XPATH, "//span[text()='" + str(SN_Gen) + "']").click()
@@ -218,7 +218,7 @@ def create_template(driver, wait, temp_name, SN_Gen, product, encoding, business
             time.sleep(3)
 
             # pool details
-            wait.until(EC.presence_of_element_located((By.NAME, "initialPoolSize"))).send_keys(str(pool_size))
+            wait.until(EC.element_to_be_clickable((By.NAME, "initialPoolSize"))).send_keys(str(pool_size))
 
             # click on submit
             driver.find_element(By.XPATH, "//button[text()='Submit']").click()

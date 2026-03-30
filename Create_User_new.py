@@ -10,7 +10,7 @@ import tempfile
 
 options = Options()
 options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
-# options.add_argument("--headless")
+options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -31,13 +31,13 @@ password=df_logindata.iloc[0, 2]
 print(url, username, password)
 
 def create_user(driver, wait, name, role, email, location, country, phone_number):
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Menu']"))).click()
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()= 'User Management']"))).click()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@aria-label='Menu']"))).click()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()= 'User Management']"))).click()
     driver.find_element(By.XPATH, "//li[text()= 'Add User']").click()
 
-    time.sleep(5)
+    time.sleep(3)
 
-    wait.until(EC.visibility_of_element_located((By.ID, "userName"))).send_keys(name)
+    wait.until(EC.element_to_be_clickable((By.ID, "userName"))).send_keys(name)
 
     driver.find_element(By.XPATH, "//span[text()='Select role']").click()
 
@@ -65,9 +65,16 @@ def create_user(driver, wait, name, role, email, location, country, phone_number
 
     # driver.find_element(By.XPATH, "//button[normalize-space(text())='Next']").click()
 
-    driver.find_element(By.XPATH, "//button[@aria-label='Next']").click()
+    next_btn=wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Next']")))
+    driver.execute_script("arguments[0].scrollIntoView(true);", next_btn)
+    driver.execute_script("arguments[0].click();", next_btn)
+    # driver.find_element(By.XPATH, "//button[@aria-label='Next']").click()
 
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Submit']"))).click()
+    time.sleep(3)
+
+    submit_btn=wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Submit']")))
+    driver.execute_script("arguments[0].scrollIntoView(true);", submit_btn)
+    driver.execute_script("arguments[0].click();", submit_btn)
 
     try:
         toast_element=wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'p-toast-detail')]")))

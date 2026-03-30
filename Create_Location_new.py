@@ -10,7 +10,7 @@ import tempfile
 
 options = Options()
 options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
-# options.add_argument("--headless")
+options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -35,13 +35,15 @@ password=df_logindata.iloc[0, 2]
 print(url, username, password)
 
 def create_location(driver, wait, loc_name, loc_type, entity, loc_id_type, loc_id, bus_ent, phy_site, loc_num, country, state, city, address, postal_code, poc_name, poc_email, phone_number, website):
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Menu']"))).click()
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()= 'Master Data']"))).click()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@aria-label='Menu']"))).click()
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()= 'Master Data']"))).click()
     driver.find_element(By.XPATH, "//li[text()= 'Location master data']").click()
 
     wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()= '+ New Location']"))).click()
 
-    wait.until(EC.presence_of_element_located((By.ID, 'locationName'))).send_keys(loc_name)
+    time.sleep(3)
+
+    wait.until(EC.element_to_be_clickable((By.ID, 'locationName'))).send_keys(loc_name)
 
     print(loc_name)
 
@@ -72,7 +74,10 @@ def create_location(driver, wait, loc_name, loc_type, entity, loc_id_type, loc_i
 
     time.sleep(2)
 
-    driver.find_element(By.XPATH, "//button[normalize-space(text())='Next']").click()
+    next_btn=wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(text())='Next']")))
+    driver.execute_script("arguments[0].scrollIntoView();", next_btn)
+    driver.execute_script("arguments[0].click();", next_btn)
+    # driver.find_element(By.XPATH, "//button[normalize-space(text())='Next']").click()
 
     time.sleep(5)
 
@@ -104,7 +109,10 @@ def create_location(driver, wait, loc_name, loc_type, entity, loc_id_type, loc_i
 
     time.sleep(2)
 
-    driver.find_element(By.XPATH, "//button[normalize-space(text())='Submit']").click()
+    submit_btn=wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(text())='Submit']")))
+    driver.execute_script("arguments[0].scrollIntoView(true);", submit_btn)
+    driver.execute_script("arguments[0].click();", submit_btn)
+    # driver.find_element(By.XPATH, "//button[normalize-space(text())='Submit']").click()
 
     try:
         toast_element=wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'p-toast-detail')]")))
