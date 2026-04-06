@@ -10,7 +10,7 @@ import tempfile
 
 options = Options()
 options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
-options.add_argument("--headless=new")
+# options.add_argument("--headless=new")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -20,6 +20,9 @@ driver=webdriver.Chrome(options=options)
 wait=WebDriverWait(driver, 15)
 
 df=pd.read_excel("ACG_Common_Workbook.xlsx", sheet_name="Product+SNG", dtype=str)
+
+df = df.dropna(how='all')
+print("Total rows:", len(df))
 
 df_logindata=pd.read_excel("ACG_Common_Workbook.xlsx", sheet_name="URL_Login_cred_Tenant")
 
@@ -146,7 +149,7 @@ def create_product(driver, wait, row_idx, prd_id, prd_name, prd_desc, manufactur
         toast_element = wait.until(
             EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'p-toast-detail')]")))
 
-        print("Toast Message:", toast_element.text.strip())
+        print(f"Toast Message: {prd_name}", toast_element.text.strip())
     except:
         print("No toast message appeared")
 
