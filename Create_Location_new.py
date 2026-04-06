@@ -10,7 +10,7 @@ import tempfile
 
 options = Options()
 options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
-# options.add_argument("--headless")
+options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -26,6 +26,8 @@ df=pd.read_excel("ACG_Common_Workbook.xlsx", sheet_name="partner", dtype={
     'Location Number': str
 })
 
+print("Total rows:", len(df))
+
 df_logindata=pd.read_excel("ACG_Common_Workbook.xlsx", sheet_name="URL_Login_cred_Tenant")
 
 url=df_logindata.iloc[0, 0]
@@ -35,8 +37,8 @@ password=df_logindata.iloc[0, 2]
 print(url, username, password)
 
 def create_location(driver, wait, loc_name, loc_type, entity, loc_id_type, loc_id, bus_ent, phy_site, loc_num, country, state, city, address, postal_code, poc_name, poc_email, phone_number, website):
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@aria-label='Menu']"))).click()
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()= 'Master Data']"))).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Menu']"))).click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()= 'Master Data']"))).click()
     driver.find_element(By.XPATH, "//li[text()= 'Location master data']").click()
 
     wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()= '+ New Location']"))).click()
