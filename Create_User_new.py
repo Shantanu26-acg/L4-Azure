@@ -31,7 +31,7 @@ password=df_logindata.iloc[0, 2]
 print(url, username, password)
 
 def create_user(driver, wait, name, role, email, location, country, phone_number):
-    time.sleep(3)
+    time.sleep(10)
     wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Menu']"))).click()
     wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()= 'User Management']"))).click()
     driver.find_element(By.XPATH, "//li[text()= 'Add User']").click()
