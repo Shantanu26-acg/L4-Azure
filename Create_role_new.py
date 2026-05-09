@@ -29,7 +29,7 @@ username=df_logindata.iloc[0, 1]
 password=df_logindata.iloc[0, 2]
 
 def create_role(driver, wait, role_name, role_desc):
-    time.sleep(3)
+    time.sleep(10)
     wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Menu']"))).click()
     wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Role Management']"))).click()
     wait.until(EC.element_to_be_clickable((By.XPATH, "//li[normalize-space()='Add Role']"))).click()
