@@ -28,6 +28,7 @@ username=df_logindata.iloc[0, 1]
 password=df_logindata.iloc[0, 2]
 
 def create_product(driver, wait, row_idx, prd_id, prd_name, prd_desc, manufacturer, no_of_levels, item_ref1, packaging_level1, level_indicator1, item_ref2, packaging_level2, level_indicator2, item_ref3, packaging_level3, level_indicator3, item_ref4, packaging_level4, level_indicator4, qty_level1, qty_level2, qty_level3):
+    time.sleep(10)
     wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@aria-label='Menu']"))).click()
     wait.until(EC.visibility_of_element_located((By.XPATH, "//span[text()= 'Master Data']"))).click()
     driver.find_element(By.XPATH, "//li[text()= 'Add Product']").click()
