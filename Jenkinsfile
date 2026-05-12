@@ -29,17 +29,17 @@ pipeline {
                         bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" -m pip install -r requirements.txt"
                     }
                     
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_role_new.py"
-                    }
+                    // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    //     bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_role_new.py"
+                    // }
                     
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_User_new.py"
-                    }
+                    // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    //     bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_User_new.py"
+                    // }
                     
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Location_new.py"
-                    }
+                    // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    //     bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Location_new.py"
+                    // }
 
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                         bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Product_SNG.py -v --html=report.html"
