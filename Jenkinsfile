@@ -48,6 +48,46 @@ pipeline {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                         bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_SSCC_Template_new.py -v --html=report.html"
                     }
+
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Subject.py"
+                    }
+                    
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Location.py"
+                    }
+
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Line.py -v --html=report.html"
+                    }
+                    
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_Product.py -v --html=report.html"
+                    }
+
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_SNG_Pool.py -v --html=report.html"
+                    }
+
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_SSCC_Pool.py -v --html=report.html"
+                    }
+
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_PO.py -v --html=report.html"
+                    }
+
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" SendToProduction.py -v --html=report.html"
+                    }
+
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" CloseBatch.py -v --html=report.html"
+                    }
+
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" DownloadEPCIS.py -v --html=report.html"
+                    }
                 }
             }
         }
