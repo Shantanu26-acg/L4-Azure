@@ -47,7 +47,7 @@ pipeline {
                     
                     // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     //     bat "\"C:/Users/Shantanu/AppData/Local/Programs/Python/Python313/python.exe\" Create_SSCC_Template_new.py -v --html=report.html"
-                    }
+                    // }
                 }
             }
         }
